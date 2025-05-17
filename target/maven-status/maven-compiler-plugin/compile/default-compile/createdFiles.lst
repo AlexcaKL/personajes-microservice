@@ -1,0 +1,12 @@
+com\tuempresa\personajes\service\impl\PersonajeServiceImpl.class
+com\tuempresa\personajes\controller\PersonajeController.class
+com\tuempresa\personajes\entity\Personaje$PersonajeBuilder.class
+com\tuempresa\personajes\exception\PersonajeNotFoundException.class
+com\tuempresa\personajes\entity\Personaje.class
+com\tuempresa\personajes\repository\PersonajeRepository.class
+com\tuempresa\personajes\exception\GlobalExceptionHandler.class
+com\tuempresa\personajes\service\PersonajeService.class
+com\tuempresa\personajes\dto\PersonajeDTO$PersonajeDTOBuilder.class
+com\tuempresa\personajes\config\CacheConfig.class
+com\tuempresa\personajes\dto\PersonajeDTO.class
+com\tuempresa\personajes\PersonajesApplication.class
