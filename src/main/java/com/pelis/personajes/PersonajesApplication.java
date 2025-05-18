@@ -1,4 +1,4 @@
-package com.tuempresa.personajes;
+package com.pelis.personajes;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package com.tuempresa.personajes.entity;
+package com.pelis.personajes.entity;
 
 import jakarta.persistence.*;
 import lombok.*;

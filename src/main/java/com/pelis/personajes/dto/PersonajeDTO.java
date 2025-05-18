@@ -1,4 +1,4 @@
-package com.tuempresa.personajes.dto;
+package com.pelis.personajes.dto;
 
 import lombok.*;
 

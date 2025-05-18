@@ -1,8 +1,8 @@
-package com.tuempresa.personajes.controller;
+package com.pelis.personajes.controller;
 
-import com.tuempresa.personajes.dto.PersonajeDTO;
-import com.tuempresa.personajes.entity.Personaje;
-import com.tuempresa.personajes.service.PersonajeService;
+import com.pelis.personajes.dto.PersonajeDTO;
+import com.pelis.personajes.entity.Personaje;
+import com.pelis.personajes.service.PersonajeService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,5 +37,25 @@ public class PersonajeController {
     public ResponseEntity<Void> eliminar(@PathVariable Long id) {
         service.eliminar(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/ordenados/asc")
+    public ResponseEntity<List<Personaje>> obtenerOrdenadosAsc() {
+        return ResponseEntity.ok(service.obtenerOrdenadosPorNombreAsc());
+    }
+
+    @GetMapping("/ordenados/desc")
+    public ResponseEntity<List<Personaje>> obtenerOrdenadosDesc() {
+        return ResponseEntity.ok(service.obtenerOrdenadosPorNombreDesc());
+    }
+
+    @GetMapping("/ordenados/fecha-asc")
+    public ResponseEntity<List<Personaje>> obtenerOrdenadosFechaAsc() {
+        return ResponseEntity.ok(service.obtenerOrdenadosPorFechaAsc());
+    }
+
+    @GetMapping("/ordenados/fecha-desc")
+    public ResponseEntity<List<Personaje>> obtenerOrdenadosFechaDesc() {
+        return ResponseEntity.ok(service.obtenerOrdenadosPorFechaDesc());
     }
 }

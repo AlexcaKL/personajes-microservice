@@ -1,4 +1,4 @@
-package com.tuempresa.personajes.exception;
+package com.pelis.personajes.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

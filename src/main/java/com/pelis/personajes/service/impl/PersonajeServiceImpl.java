@@ -1,10 +1,12 @@
-package com.tuempresa.personajes.service.impl;
+package com.pelis.personajes.service.impl;
 
-import com.tuempresa.personajes.dto.PersonajeDTO;
-import com.tuempresa.personajes.entity.Personaje;
-import com.tuempresa.personajes.exception.PersonajeNotFoundException;
-import com.tuempresa.personajes.repository.PersonajeRepository;
-import com.tuempresa.personajes.service.PersonajeService;
+import com.pelis.personajes.dto.PersonajeDTO;
+import com.pelis.personajes.entity.Personaje;
+import com.pelis.personajes.exception.PersonajeNotFoundException;
+import com.pelis.personajes.repository.PersonajeRepository;
+import com.pelis.personajes.service.PersonajeService;
+
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,7 @@ public class PersonajeServiceImpl implements PersonajeService {
     }
 
     @Override
+    @CacheEvict(value = { "personajes", "personajesNombreAsc", "personajesNombreDesc","personajesFechaAsc","personajesFechaDesc"}, allEntries = true)
     public Personaje crear(PersonajeDTO dto) {
         Personaje personaje = Personaje.builder()
                 .nombre(dto.getNombre())
@@ -47,6 +50,7 @@ public class PersonajeServiceImpl implements PersonajeService {
     }
 
     @Override
+   @CacheEvict(value = { "personajes", "personajesNombreAsc", "personajesNombreDesc","personajesFechaAsc","personajesFechaDesc"}, allEntries = true)
     public Personaje editar(Long id, PersonajeDTO dto) {
         Personaje personaje = repository.findById(id)
                 .orElseThrow(() -> new PersonajeNotFoundException("No se encontró el personaje con ID: " + id));
@@ -60,10 +64,35 @@ public class PersonajeServiceImpl implements PersonajeService {
     }
 
     @Override
+    @CacheEvict(value = { "personajes", "personajesNombreAsc", "personajesNombreDesc","personajesFechaAsc","personajesFechaDesc"}, allEntries = true)
     public void eliminar(Long id) {
         if (!repository.existsById(id)) {
             throw new PersonajeNotFoundException("No se encontró el personaje con ID: " + id);
         }
         repository.deleteById(id);
+    }
+
+    @Override
+    @Cacheable("personajesNombreAsc")
+    public List<Personaje> obtenerOrdenadosPorNombreAsc() {
+        return repository.findAllByOrderByNombreAsc();
+    }
+
+    @Override
+    @Cacheable("personajesNombreDesc")
+    public List<Personaje> obtenerOrdenadosPorNombreDesc() {
+        return repository.findAllByOrderByNombreDesc();
+    }
+
+    @Override
+    @Cacheable("personajesFechaAsc")
+    public List<Personaje> obtenerOrdenadosPorFechaAsc() {
+        return repository.findAllByOrderByFechaCreacionAsc();
+    }
+
+    @Override
+    @Cacheable("personajesFechaDesc")
+    public List<Personaje> obtenerOrdenadosPorFechaDesc() {
+        return repository.findAllByOrderByFechaCreacionDesc();
     }
 }
